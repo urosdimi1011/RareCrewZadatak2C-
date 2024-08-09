@@ -1,0 +1,46 @@
+﻿@model List<EmployeeTimeEntry>
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Employee Time Tracker</title>
+    <style>
+        .low-work {
+            background-color: red;
+        }
+        thead{
+            background-color:silver;
+        }
+        th,td{
+            padding-left:7px;
+            padding-top:10px;
+            padding-bottom:10px;
+            width:200px;
+        }
+
+    </style>
+</head>
+<body>
+    <h1>Employees Ordered by Total Time Worked</h1>
+    <table border="1">
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Total time in Month</th>
+                <th>Edit</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var entry in Model)
+            {
+                var rowClass = entry.TotalTimeWorked < 100 ? "low-work" : "";
+                <tr class="@rowClass">
+                    <td>@entry.EmployeeName</td>
+                    <td>@entry.TotalTimeWorked.ToString("0.##") hrs</td>
+                    <td><a href="#">Edit</a></td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</body>
+</html>
